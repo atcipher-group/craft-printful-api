@@ -1,0 +1,66 @@
+{% extends "_layouts/cp.twig" %}
+{% set title = "Printful - Product Colours" %}
+
+{% block sidebar %}
+    {% include "_printful/sidenav.twig" %}
+{% endblock %}
+
+{% set lightColours = [
+    'White'
+] %}
+
+{% set tabs = {
+    colours: {
+        label: 'Colours'|t('plugin-handle'),
+        url: '#colours',
+    },
+    copyColours: {
+        label: 'Copy Colours'|t('plugin-handle'),
+        url: '#copyColours',
+    },
+} %}
+
+{% block content %}
+    <div id="colours">
+        <div style="display: grid; gap: 2rem; grid-template-columns: repeat(10,minmax(0,1fr));">
+            {% set colourArray = [] %}
+            {% for row in colours %}
+                {% if row.name not in colourArray %}
+                    {% set colourArray = colourArray|merge([row.name]) %}
+                    <div style="display: block; word-wrap: normal;">
+                        {% set borderColour = row.code[0] %}
+                        {% if row.name in lightColours %}
+                            {% set borderColour = '#888888' %}
+                        {% endif %}
+                        <div style="border-color: {{ borderColour }}; background-color: {{ row.code[0] }}; border-radius: 9999px; border-width: 1px; display: block; height: 2rem; margin: 0.125rem auto; width: 2rem;"></div>
+                        <p style="height: 2rem; text-align: center">{{ row.name }}</p>
+                        <p style="text-align: center;">{{ row.code[0] }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div id="copyColours" class="hidden">
+        <div id="coloursScss" style="position: relative; background-color: var(--gray-100); border: 1px solid var(--text-color); padding: 1.5rem;">
+            <button type="button" class="btn" onclick="copyToClipboard('coloursScss')" style="position: absolute; top: 1rem; right: 1rem;">Copy To Clipboard</button>
+            {% set colourArray = [] %}
+            {% for row in colours %}
+                {% if row.name not in colourArray %}
+                    {% set colourArray = colourArray|merge([row.name]) %}
+                    "{{ row.name|lower|replace(' ', '-') }}": {{ row.code[0] }},<br>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% js %}
+    function copyToClipboard(id) {
+        let range = document.createRange();
+        range.selectNode(document.getElementById(id));
+        window.getSelection().removeAllRanges(); // clear current selection
+        window.getSelection().addRange(range); // to select text
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();// to deselect
+    }
+{% endjs %}

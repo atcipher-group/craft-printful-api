@@ -1,0 +1,132 @@
+{% extends "_layouts/cp.twig" %}
+{% import "_includes/forms" as form %}
+{% set title = "Printful - Webhooks" %}
+
+{% block sidebar %}
+    {% include "_printful/sidenav.twig" %}
+{% endblock %}
+
+{% block actionButton %}
+     <form method="post">
+        {{ csrfInput() }}
+        {{ actionInput('_printful/webhooks/remove') }}
+        {{ redirectInput('_printful/settings/webhooks') }}
+        {{ form.button({
+            'label': 'Remove Webhooks',
+            'attributes': {
+                'id': 'removeWebhooksBtn',
+                'type': 'submit',
+                'class': ['btn']
+            }
+        }) }}
+     </form>
+{% endblock %}
+
+{% block content %}
+    <h2>Manage Printful Webhooks</h2>
+    <p>
+        Select the webhooks you want to use below for your site.
+    </p>
+    <form method="post">
+        {{ csrfInput() }}
+        {{ actionInput('_printful/webhooks/create') }}
+        {{ redirectInput('_printful/settings/webhooks') }}
+        {{ form.checkboxGroupField({
+            options: [
+                {
+                    label: 'Package Shipped',
+                    name: 'webhookOptions[]',
+                    id: 'packageShipped',
+                    value: 'package_shipped',
+                    checked: 'package_shipped' in choices.types
+                },
+                {
+                    label: 'Package Returned',
+                    name: 'webhookOptions[]',
+                    id: 'packageReturned',
+                    value: 'package_returned',
+                    checked: 'package_returned' in choices.types
+                },
+                {
+                    label: 'Order Created',
+                    name: 'webhookOptions[]',
+                    id: 'orderCreated',
+                    value: 'order_created',
+                    checked: 'order_created' in choices.types
+                },
+                {
+                    label: 'Order Updated',
+                    name: 'webhookOptions[]',
+                    id: 'orderUpdated',
+                    value: 'order_updated',
+                    checked: 'order_updated' in choices.types
+                },
+                {
+                    label: 'Order Failed',
+                    name: 'webhookOptions[]',
+                    id: 'orderFailed',
+                    value: 'order_failed',
+                    checked: 'order_failed' in choices.types
+                },
+                {
+                    label: 'Order Cancelled',
+                    name: 'webhookOptions[]',
+                    id: 'orderCanceled',
+                    value: 'order_canceled',
+                    checked: 'order_canceled' in choices.types
+                },
+                {
+                    label: 'Order Put on Hold',
+                    name: 'webhookOptions[]',
+                    id: 'orderPutHold',
+                    value: 'order_put_hold',
+                    checked: 'order_put_hold' in choices.types
+                },
+                {
+                    label: 'Order Put on Hold Approval',
+                    name: 'webhookOptions[]',
+                    id: 'orderPutHoldApproval',
+                    value: 'order_put_hold_approval',
+                    checked: '' in choices.types
+                },
+                {
+                    label: 'Order Remove Hold',
+                    name: 'webhookOptions[]',
+                    id: 'orderRemoveHold',
+                    value: 'order_remove_hold',
+                    checked: 'order_remove_hold' in choices.types
+                },
+                {
+                    label: 'Product Updated',
+                    name: 'webhookOptions[]',
+                    id: 'productUpdated',
+                    value: 'product_updated',
+                    checked: 'product_updated' in choices.types
+                },
+                {
+                    label: 'Product Deleted',
+                    name: 'webhookOptions[]',
+                    id: 'productDeleted',
+                    value: 'product_deleted',
+                    checked: 'product_deleted' in choices.types
+                },
+                {
+                    label: 'Stock Updated',
+                    name: 'webhookOptions[]',
+                    id: 'stockUpdated',
+                    value: 'stock_updated',
+                    checked: 'stock_updated' in choices.types
+                }
+            ],
+        }) }}
+        {{ form.button({
+            'label': 'Setup Webhooks',
+            'attributes': {
+                'id': 'setupWebhooksBtn',
+                'type': 'submit',
+                'class': ['btn', 'submit']
+            },
+            'spinner': true
+        }) }}
+    </form>
+{% endblock %}

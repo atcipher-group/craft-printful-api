@@ -1,0 +1,79 @@
+{% extends "_layouts/cp.twig" %}
+{% import "_includes/forms" as form %}
+{% set title = "Printful - Categories" %}
+
+{% block sidebar %}
+    {% include "_printful/sidenav.twig" %}
+{% endblock %}
+
+{% block content %}
+    <h2>Import Categories from Printful</h2>
+    <p>
+        Rather than creating all  the categories yourself, use the "Import Categories" button below to pull in the
+        categories from Printful's API. This will import them into the Craft CMS categories section that will appear in
+        the main navigation once complete. If any more Categories come around, just hit the Import button again.
+    </p>
+    <form method="post">
+        {{ csrfInput() }}
+        {{ actionInput('_printful/category/import') }}
+        {{ redirectInput('_printful/settings/categories') }}
+        {{ form.button({
+            'label': 'Import Categories',
+            'attributes': {
+                'id': 'importCategoriesBtn',
+                'type': 'submit',
+                'class': ['btn', 'submit']
+            },
+            'spinner': true
+        }) }}
+    </form>
+    <hr>
+    <h3>Results</h3>
+    <div class="tableview">
+        <table class="data fullwidth tw-text-center">
+            <thead>
+                <tr>
+                    <th scope="col">Field Group Created</th>
+                    <th scope="col">Field Created</th>
+                    <th scope="col">Group Created</th>
+                    <th scope="col"># Categories Imported</th>
+                    <th scope="col">Last Imported</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {% if settings.categoryFieldGroup %}
+                            <span data-icon="check" aria-hidden="true"></span>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if settings.categoryField %}
+                            <span data-icon="check" aria-hidden="true"></span>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if settings.categoryGroup %}
+                            <span data-icon="check" aria-hidden="true"></span>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>{{ settings.categoryImport }}</td>
+                    <td>{{ (settings.categoryImportDateTime is not null) ? settings.categoryImportDateTime|date('jS F Y H:ia') : '-' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% js %}
+    let importBtn = document.getElementById('importCategoriesBtn')
+    importBtn.addEventListener('click', (e) => {
+    importBtn.classList.add('loading')
+    })
+{% endjs %}

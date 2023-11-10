@@ -1,0 +1,35 @@
+<div class="tablepane">
+    <table id="printfulReports" class="data fullwidth">
+        <thead>
+        <tr>
+            <th colspan="8">Costs By Report ({{ results.post.currency }})</th>
+        </tr>
+        <tr>
+            <th scope="col">Product ID</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Fulfillment</th>
+            <th scope="col">Sales</th>
+            <th scope="col">Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if results.data|length > 0 %}
+            {% for row in results.data %}
+                <tr>
+                    <th scope="row">
+                        {{ row.product_id }}
+                    </th>
+                    <td>{{ row.product_name }}</td>
+                    <td>{{ row.fulfillment }}</td>
+                    <td>{{ row.sales }}</td>
+                    <td>{{ row.quantity }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5">Nothing to report yet.</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>

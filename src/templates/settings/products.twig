@@ -1,0 +1,57 @@
+{% extends "_layouts/cp.twig" %}
+{% import "_includes/forms" as form %}
+{% set title = "Printful - Products & Variants" %}
+
+{% block sidebar %}
+    {% include "_printful/sidenav.twig" %}
+{% endblock %}
+
+{% block content %}
+    <h2>Import Products & Variants from Printful</h2>
+    <p>
+        The best way to use this plugin is to Import the Products and their Variants into Craft Commerce from Printful.
+        Due to the nature of an API it can take some time to import the products and it's variants. Once you have
+        clicked the button below, wait for it to complete. Any errors will be shown here.
+    </p>
+    <form method="post">
+        {{ csrfInput() }}
+        {{ actionInput('_printful/products/importproducts') }}
+        {{ redirectInput('_printful/settings/products') }}
+        {{ form.button({
+            'label': 'Import Products & Variants',
+            'attributes': {
+                'id': 'importProductsBtn',
+                'type': 'submit',
+                'class': ['btn', 'submit']
+            },
+            'spinner': true
+        }) }}
+    </form>
+    <hr>
+    <h3>Results</h3>
+    <div class="tableview">
+        <table class="data fullwidth tw-text-center">
+            <thead>
+            <tr>
+                <th scope="col"># Products</th>
+                <th scope="col"># Variants</th>
+                <th scope="col">Last Imported</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ settings.productImport }}</td>
+                <td>{{ settings.variantImport }}</td>
+                <td>{{ (settings.productImportDateTime is not null) ? settings.productImportDateTime|date('jS F Y H:ia') : '-' }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% js %}
+    let importBtn = document.getElementById('importProductsBtn')
+    importBtn.addEventListener('click', (e) => {
+        importBtn.classList.add('loading')
+    })
+{% endjs %}

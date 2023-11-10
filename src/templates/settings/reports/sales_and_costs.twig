@@ -1,0 +1,35 @@
+<div class="tablepane">
+    <table id="printfulReports" class="data fullwidth">
+        <thead>
+            <tr>
+                <th colspan="8">Sales & Costs Report ({{ results.post.currency }})</th>
+            </tr>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Sales</th>
+                <th scope="col">Fulfillment</th>
+                <th scope="col">Profit</th>
+                <th scope="col">Sales Discount</th>
+                <th scope="col">Fulfillment Discount</th>
+                <th scope="col">Sales Shipping</th>
+                <th scope="col">Fulfillment Shipping</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in results.data %}
+            <tr>
+                <th scope="row">
+                    {{ (row.date != 'Total') ? row.date|date('d/m/Y') : row.date }}
+                </th>
+                <td>{{ row.sales }}</td>
+                <td>{{ row.fulfillment }}</td>
+                <td>{{ row.profit }}</td>
+                <td>{{ row.sales_discount }}</td>
+                <td>{{ row.fulfillment_discount }}</td>
+                <td>{{ row.sales_shipping }}</td>
+                <td>{{ row.fulfillment_shipping }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,78 @@
+{% extends "_layouts/cp.twig" %}
+{% import "_includes/forms" as form %}
+{% set title = "Printful" %}
+
+{% block actionButton %}
+    {{ form.button({
+        'label': 'Save',
+        'attributes': {
+            'type': 'button',
+            'class': ['btn', 'submit'],
+            'id': 'saveSettings'
+        }
+    }) }}
+{% endblock %}
+
+{% block sidebar %}
+    {% include "_printful/sidenav.twig" %}
+{% endblock %}
+
+{% block content %}
+    <h2>Printful App Settings</h2>
+    <p>
+        Before you can use the Printful API, we just need a few things to be added. Mainly your API Key and a Product
+        Type within your Craft Commerce settings.
+    </p>
+    <hr>
+    <form id="apiSettings" method="post">
+        {{ csrfInput() }}
+        {{ actionInput('_printful/settings/save') }}
+        {{ redirectInput('_printful/settings') }}
+        {{ form.textField({
+            'first': true,
+            'label': 'API Key',
+            'name': 'apiKey',
+            'instructions': 'Enter Your API KEY from Printful here.',
+            'required': true,
+            'value': settings.apiKey
+        }) }}
+
+        {{ form.textField({
+            'label': 'All Access API Key',
+            'name': 'allAccessKey',
+            'instructions': 'You also need an All Access API Key from Printful. This will help build fields for your Products & Variants.',
+            'required': true,
+            'value': settings.allAccessKey
+        }) }}
+
+        {{ form.textField({
+            'label': 'Product Type Handle',
+            'name': 'productType',
+            'instructions': 'Create a Product Type and then enter the handle here. <a href="/admin/commerce/settings/producttypes">Click here</a>.',
+            'required': true,
+            'value': settings.productType
+        }) }}
+
+        {{ form.lightswitchField({
+            'label': 'Use Printful Shipping Rates',
+            'name': 'printfulShipping',
+            'instructions': 'To save time building a Shipping Matrix, why not use Printful\'s Shipping Rates from their API. This will override all shipping methods that are assigned to Printful products.',
+            'on': settings.printfulShipping,
+            'value': settings.printfulShipping
+        }) }}
+
+        {{ form.lightswitchField({
+            'label': 'Import Printful Images?',
+            'name': 'importProductImages',
+            'instructions': 'Importing the images will save product pictures locally. This can take some time and cause a Gateway Timeout. If you would rather use Printful\'s image CDN, then leave this as false.',
+            'on': settings.importProductImages,
+            'value': settings.importProductImages
+        }) }}
+    </form>
+{% endblock %}
+
+{% js %}
+    document.getElementById('saveSettings').addEventListener('click', function() {
+        document.getElementById('apiSettings').submit();
+    });
+{% endjs %}

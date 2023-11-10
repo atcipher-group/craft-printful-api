@@ -1,0 +1,22 @@
+{% extends "_layouts/cp.twig" %}
+{% import "_includes/forms" as form %}
+{% set title = "Printful - Recent Orders" %}
+
+{% block sidebar %}
+    {% include "_printful/sidenav.twig" %}
+{% endblock %}
+
+{% block actionButton %}
+    {{ form.button({
+        'label': 'Commerce Orders',
+        'attributes': {
+            'type': 'button',
+            'class': ['btn'],
+            'onclick': "window.location.href='/admin/commerce/orders'"
+        }
+    }) }}
+{% endblock %}
+
+{% block content %}
+    <p></p>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "_layouts/cp.twig" %}
+{% import "_includes/forms" as form %}
+{% set title = "Printful - Reports" %}
+
+{% css %}
+    #apiReports .field,
+    #apiReports .datefield {
+        display: inline-flex;
+        flex: auto;
+    }
+
+    #apiReports .datefield label {
+        margin: auto 1rem auto 0;
+    }
+{% endcss %}
+
+{% block sidebar %}
+    {% include "_printful/sidenav.twig" %}
+{% endblock %}
+
+{% block toolbar %}
+    {% set currencies = craft.commerce.paymentCurrencies.allPaymentCurrencies %}
+    {% set currencyOptions = [{'label': 'Currency', 'value': ''}] %}
+    {% for currency in currencies %}
+        {% set currencyOptions = currencyOptions|merge([{'label' : currency.name, 'value' : currency.iso}]) %}
+    {% endfor %}
+    <form id="apiReports" method="post" class="fullwidth flex flex-fields">
+        {{ csrfInput() }}
+        {{ actionInput('_printful/reports/settings') }}
+        <div class="datefield">
+            <label>Start Date</label>
+            {{ form.date({
+                'first': true,
+                'placeholder': 'Start Date',
+                'name': 'date_from',
+                'value': (results is not empty) ? results.post.date_from
+            }) }}
+        </div>
+        <div class="datefield">
+            <label>End Date</label>
+            {{ form.date({
+                'placeholder': 'End Date',
+                'name': 'date_to',
+                'value': (results is not empty) ? results.post.date_to
+            }) }}
+        </div>
+        {{ form.select({
+            'name': 'report_types',
+            'options' : {
+                '': 'Choose A Report Type',
+                'sales_and_costs': 'Detailed Sales & Costs',
+                'sales_and_costs_summary': 'Sales & Costs Summary',
+                'printful_costs': 'Printful Costs',
+                'profit': 'Profit',
+                'total_paid_orders': 'Total Paid Assets',
+                'costs_by_amount': 'Costs By Amount',
+                'costs_by_product': 'Costs By Product',
+                'costs_by_variant': 'Costs By Variant',
+                'average_fulfillment_time': 'Average Fulfillment Time',
+            },
+            'value': (results is not empty) ? results.post.report_types
+        }) }}
+        {{ form.select({
+            'name': 'currency',
+            'options': currencyOptions,
+            'value': (results is not empty) ? results.post.currency
+        }) }}
+        {{ form.button({
+            'label': 'Get Report',
+            'attributes': {
+                'type': 'submit',
+                'class': ['btn', 'submit']
+            }
+        }) }}
+    </form>
+{% endblock %}
+
+{% block content %}
+    {% if results.post is defined %}
+        {% switch results.post.report_types %}
+            {% case 'sales_and_costs' %}
+                {% include '_printful/settings/reports/sales_and_costs.twig' %}
+            {% case 'sales_and_costs_summary' %}
+                {% include '_printful/settings/reports/sales_and_costs_summary.twig' %}
+            {% case 'printful_costs' %}
+                {% include '_printful/settings/reports/printful_costs.twig' %}
+            {% case 'profit' %}
+                {% include '_printful/settings/reports/profit.twig' %}
+            {% case 'total_paid_orders' %}
+                {% include '_printful/settings/reports/total_paid_orders.twig' %}
+            {% case 'costs_by_amount' %}
+                {% include '_printful/settings/reports/costs_by_amount.twig' %}
+            {% case 'costs_by_product' %}
+                {% include '_printful/settings/reports/costs_by_product.twig' %}
+            {% case 'costs_by_variant' %}
+                {% include '_printful/settings/reports/costs_by_variant.twig' %}
+            {% case 'average_fulfillment_time' %}
+                {% include '_printful/settings/reports/average_fulfillment_time.twig' %}
+        {% endswitch %}
+    {% else %}
+        <h2>Generate Reports from Printful</h2>
+        <p>
+            To generate a report, fill in the details above and click "Get Report". The data will be collected from
+            Printful and displayed here.
+        </p>
+    {% endif %}
+{% endblock %}

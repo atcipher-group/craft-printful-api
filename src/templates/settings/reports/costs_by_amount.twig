@@ -1,0 +1,37 @@
+<div class="tablepane">
+    <table id="printfulReports" class="data fullwidth">
+        <thead>
+            <tr>
+                <th colspan="9">Costs By Amount Report ({{ results.post.currency }})</th>
+            </tr>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Product Amount</th>
+                <th scope="col">Digitization</th>
+                <th scope="col">Branding</th>
+                <th scope="col">VAT</th>
+                <th scope="col">Sales Tax</th>
+                <th scope="col">Shipping</th>
+                <th scope="col">Discount</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in results.data %}
+            <tr>
+                <th scope="row">
+                    {{ (row.date != 'Total') ? row.date|date('d/m/Y') : row.date }}
+                </th>
+                <td>{{ row.product_amount }}</td>
+                <td>{{ row.digitization }}</td>
+                <td>{{ row.branding }}</td>
+                <td>{{ row.vat }}</td>
+                <td>{{ row.sales_tax }}</td>
+                <td>{{ row.shipping }}</td>
+                <td>{{ row.discount }}</td>
+                <td>{{ row.total }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

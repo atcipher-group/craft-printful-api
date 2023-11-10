@@ -1,0 +1,46 @@
+{% set url = craft.app.request.url %}
+{% set prefix = '/admin/_printful/settings' %}
+{% set nav = {
+    label: 'Printful Navigation',
+    items: [
+        {
+            label: 'Default Settings',
+            url: prefix,
+            selectedItem: (url == prefix)
+        },
+        {
+            label: 'Categories',
+            url: "#{prefix}/categories",
+            selectedItem: (url == prefix ~ '/categories')
+        },
+        {
+            label: 'Products & Variants',
+            url: "#{prefix}/products",
+            selectedItem: (url == prefix ~ '/products')
+        },
+        {
+            label: 'Orders',
+            url: "#{prefix}/orders",
+            selectedItem: (url == prefix ~ '/orders')
+        },
+        {
+            label: 'Reports',
+            url: "#{prefix}/reports",
+            selectedItem: (url == prefix ~ '/reports')
+        },
+        {
+            label: 'Webhooks',
+            url: "#{prefix}/webhooks",
+            selectedItem: (url == prefix ~ '/webhooks')
+        },
+    ]
+} %}
+<nav {% if nav.label is defined and nav.label %}aria-label="{{ nav.label }}"{% endif %}>
+    <ul>
+        {% for item in nav.items %}
+            {% if item %}
+                <li><a{% if item.selectedItem %} class="sel"{% endif %} href="{{ item.url }}">{{ item.label }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
