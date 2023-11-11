@@ -76,6 +76,7 @@ class CategoryController extends Controller
             $fieldGroup->name = "Product";
             \Craft::$app->fields->saveGroup($fieldGroup);
             $fieldGroupCheck = null;
+            $allFieldGroups = \Craft::$app->getFields()->getAllGroups();
             foreach ($allFieldGroups as $row) {
                 if ($row->name === 'Product') {
                     $fieldGroupCheck = $row->id;
@@ -123,7 +124,7 @@ class CategoryController extends Controller
         $tabs = $fieldLayout->getTabs();
         $check = false;
         foreach ($tabs[0]->getLayout()->getCustomFields() as $i => $element) {
-            if ($element instanceof PlainText && $element->handle === 'printfulCategoryId') {
+            if ($element instanceof CustomField && $element->handle === 'printfulCategoryId') {
                 $check = true;
             }
         }
@@ -247,6 +248,7 @@ class CategoryController extends Controller
             'categoryImport' => $settings['import'],
             'categoryImportDateTime' => $settings['datetime'],
         ]);
+        \Craft::$app->getProjectConfig()->rebuild();
         $this->setSuccessFlash('You have successfully imported your categories');
     }
 }

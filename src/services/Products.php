@@ -14,11 +14,10 @@ use craft\fieldlayoutelements\CustomField;
 use craft\fields\Assets;
 use craft\fields\Categories;
 use craft\fields\Dropdown;
+use craft\fields\PlainText;
 use craft\fields\Url;
 use craft\helpers\StringHelper;
 use craft\models\FieldGroup;
-use craft\redactor\assets\redactor\RedactorAsset;
-use craft\redactor\Field;
 use craft\services\Fields;
 use Printful\Exceptions\PrintfulApiException;
 use Printful\Exceptions\PrintfulException;
@@ -150,7 +149,7 @@ class Products
             $description = $fields->createField([
                 'name' => 'Printful Description',
                 'handle' => 'printfulDescription',
-                'type' => 'craft\redactor\Field',
+                'type' => 'craft\fields\PlainText',
                 'groupId' => $fieldGroupCheck,
                 'searchable' => false,
             ]);
@@ -212,7 +211,7 @@ class Products
         $imgCheck = false;
         $cdnCheck = false;
         foreach ($tabs[0]->getLayout()->getCustomFields() as $i => $element) {
-            if ($element instanceof Field && $element->handle === 'printfulDescription') {
+            if ($element instanceof PlainText && $element->handle === 'printfulDescription') {
                 $descCheck = true;
             }
             if ($element instanceof Categories && $element->handle === 'printfulCategories') {
@@ -377,26 +376,27 @@ class Products
 
         $color = \Craft::$app->fields->getFieldByHandle('printfulAttrColor');
         if (!$colorField) {
-            $newElements[] = [
+            $newElements = [
                 'type' => CustomField::class,
                 'fieldUid' => $color->uid,
                 'required' => false
             ];
 
-            $tabs[0]->setElements(array_merge($tabs[0]->getElements(), $newElements));
+            $tabs[0]->setElements(array_merge($tabs[0]->getElements(), [$newElements]));
+
             $fieldLayout->setTabs($tabs);
             \Craft::$app->fields->saveLayout($fieldLayout);
         }
 
         $size = \Craft::$app->fields->getFieldByHandle('printfulAttrSize');
         if (!$sizeField) {
-            $newElements[] = [
+            $newElements = [
                 'type' => CustomField::class,
                 'fieldUid' => $size->uid,
                 'required' => false
             ];
 
-            $tabs[0]->setElements(array_merge($tabs[0]->getElements(), $newElements));
+            $tabs[0]->setElements(array_merge($tabs[0]->getElements(), [$newElements]));
             $fieldLayout->setTabs($tabs);
             \Craft::$app->fields->saveLayout($fieldLayout);
         }

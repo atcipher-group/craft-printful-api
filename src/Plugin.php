@@ -203,7 +203,7 @@ class Plugin extends BasePlugin
 
     public function getSettingsResponse(): mixed
     {
-        $url = \craft\helpers\UrlHelper::cpUrl('craft-printful-api/settings');
+        $url = \craft\helpers\UrlHelper::cpUrl('printful-api/settings');
         return \Craft::$app->controller->redirect($url);
     }
 
