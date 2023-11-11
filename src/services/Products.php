@@ -3,7 +3,7 @@
 namespace atciphergroup\craftprintfulapi\services;
 
 use atciphergroup\craftprintfulapi\helpers\ArrayHelper;
-use atciphergroup\craftprintfulapi\PrintfulPlugin;
+use atciphergroup\craftprintfulapi\Plugin as PrintfulPlugin;
 use craft\commerce\elements\Product;
 use craft\commerce\elements\Variant;
 use craft\commerce\services\ProductTypes;
@@ -52,6 +52,7 @@ class Products
             $fieldGroup->name = "Variants";
             \Craft::$app->fields->saveGroup($fieldGroup);
             $fieldGroupCheck = null;
+            $allFieldGroups = \Craft::$app->getFields()->getAllGroups();
             foreach ($allFieldGroups as $row) {
                 if ($row->name === 'Variants') {
                     $fieldGroupCheck = $row->id;
@@ -135,6 +136,7 @@ class Products
             $fieldGroup->name = "Product";
             \Craft::$app->fields->saveGroup($fieldGroup);
             $fieldGroupCheck = null;
+            $allFieldGroups = \Craft::$app->getFields()->getAllGroups();
             foreach ($allFieldGroups as $row) {
                 if ($row->name === 'Product') {
                     $fieldGroupCheck = $row->id;
@@ -292,6 +294,7 @@ class Products
             $fieldGroup->name = "Variants";
             \Craft::$app->fields->saveGroup($fieldGroup);
             $fieldGroupCheck = null;
+            $allFieldGroups = \Craft::$app->getFields()->getAllGroups();
             foreach ($allFieldGroups as $row) {
                 if ($row->name === 'Product') {
                     $fieldGroupCheck = $row->id;

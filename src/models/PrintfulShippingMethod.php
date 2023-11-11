@@ -12,7 +12,7 @@ class PrintfulShippingMethod extends ShippingMethod
 
     public function getType(): string
     {
-        return '_printful';
+        return 'printful-api';
     }
 
     public function getId(): ?int

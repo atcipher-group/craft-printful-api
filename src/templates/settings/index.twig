@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block sidebar %}
-    {% include "_printful/sidenav.twig" %}
+    {% include "craft-printful-api/sidenav.twig" %}
 {% endblock %}
 
 {% block content %}
@@ -26,8 +26,8 @@
     <hr>
     <form id="apiSettings" method="post">
         {{ csrfInput() }}
-        {{ actionInput('_printful/settings/save') }}
-        {{ redirectInput('_printful/settings') }}
+        {{ actionInput('craft-printful-api/settings/save') }}
+        {{ redirectInput('craft-printful-api/settings') }}
         {{ form.textField({
             'first': true,
             'label': 'API Key',

@@ -2,13 +2,15 @@
 
 namespace atciphergroup\craftprintfulapi\controllers;
 
-use atciphergroup\craftprintfulapi\PrintfulPlugin;
+use atciphergroup\craftprintfulapi\Plugin as PrintfulPlugin;
 use atciphergroup\craftprintfulapi\services\Webhooks;
 use Craft;
+use craft\errors\SiteNotFoundException;
 use craft\web\Controller;
 use Printful\Exceptions\PrintfulException;
 use Printful\PrintfulApiClient;
 use Printful\PrintfulWebhook;
+use yii\base\InvalidConfigException;
 use yii\web\BadRequestHttpException;
 
 class WebhooksController extends Controller
@@ -29,7 +31,7 @@ class WebhooksController extends Controller
         $webhooks = new PrintfulWebhook($pr);
         $data = $webhooks->getRegisteredWebhooks();
 
-        return $this->renderTemplate('_printful/settings/webhooks.twig', [
+        return $this->renderTemplate('craft-printful-api/settings/webhooks.twig', [
             'choices' => $data
         ]);
     }
@@ -83,6 +85,8 @@ class WebhooksController extends Controller
 
     /**
      * @throws PrintfulException
+     * @throws InvalidConfigException
+     * @throws SiteNotFoundException
      */
     public function actionCreate()
     {
@@ -97,7 +101,7 @@ class WebhooksController extends Controller
 
         $webhooks = new PrintfulWebhook($pr);
         $webhooks->registerWebhooks(
-            'https://www.thedevstore.com/_printful/webhooks/update',
+            Craft::$app->getSites()->getCurrentSite()->getBaseUrl() . '/printful-api/webhooks/update',
             $choices
         );
 

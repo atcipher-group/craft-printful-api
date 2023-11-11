@@ -2,7 +2,7 @@
 
 namespace atciphergroup\craftprintfulapi\controllers;
 
-use atciphergroup\craftprintfulapi\PrintfulPlugin;
+use atciphergroup\craftprintfulapi\Plugin as PrintfulPlugin;
 use craft\web\Controller;
 use Printful\PrintfulApiClient;
 
@@ -31,7 +31,7 @@ class ReportsController extends Controller
             ];
         }
 
-        return $this->renderTemplate('_printful/settings/reports.twig', [
+        return $this->renderTemplate('craft-printful-api/settings/reports.twig', [
             'settings' => $settings,
             'results' => $results
         ]);

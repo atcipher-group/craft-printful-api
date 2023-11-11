@@ -2,7 +2,7 @@
 
 namespace atciphergroup\craftprintfulapi\controllers;
 
-use atciphergroup\craftprintfulapi\PrintfulPlugin;
+use atciphergroup\craftprintfulapi\Plugin as PrintfulPlugin;
 use craft\web\Controller;
 use Printful\PrintfulApiClient;
 
@@ -27,7 +27,7 @@ class AdditionalController extends Controller
             }
         }
 
-        return $this->renderTemplate('_printful/pages/colours.twig', [
+        return $this->renderTemplate('craft-printful-api/pages/colours.twig', [
             'colours' => $colours
         ]);
     }
@@ -51,7 +51,7 @@ class AdditionalController extends Controller
             }
         }
 
-        return $this->renderTemplate('_printful/pages/copy_colours.twig', [
+        return $this->renderTemplate('craft-printful-api/pages/copy_colours.twig', [
             'colours' => $colours
         ]);
     }

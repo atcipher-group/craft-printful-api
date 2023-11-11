@@ -2,7 +2,7 @@
 
 namespace atciphergroup\craftprintfulapi\controllers;
 
-use atciphergroup\craftprintfulapi\PrintfulPlugin;
+use atciphergroup\craftprintfulapi\Plugin as PrintfulPlugin;
 use craft\elements\Category;
 use craft\errors\CategoryGroupNotFoundException;
 use craft\fieldlayoutelements\CustomField;
@@ -28,7 +28,7 @@ class CategoryController extends Controller
     {
         $settings = PrintfulPlugin::getInstance()->getSettings();
 
-        return $this->renderTemplate('_printful/settings/category.twig', [
+        return $this->renderTemplate('craft-printful-api/settings/category.twig', [
             'settings' => $settings
         ]);
     }

@@ -15,7 +15,7 @@
 {% endcss %}
 
 {% block sidebar %}
-    {% include "_printful/sidenav.twig" %}
+    {% include "craft-printful-api/sidenav.twig" %}
 {% endblock %}
 
 {% block toolbar %}
@@ -26,7 +26,7 @@
     {% endfor %}
     <form id="apiReports" method="post" class="fullwidth flex flex-fields">
         {{ csrfInput() }}
-        {{ actionInput('_printful/reports/settings') }}
+        {{ actionInput('craft-printful-api/reports/settings') }}
         <div class="datefield">
             <label>Start Date</label>
             {{ form.date({
@@ -79,23 +79,23 @@
     {% if results.post is defined %}
         {% switch results.post.report_types %}
             {% case 'sales_and_costs' %}
-                {% include '_printful/settings/reports/sales_and_costs.twig' %}
+                {% include 'craft-printful-api/settings/reports/sales_and_costs.twig' %}
             {% case 'sales_and_costs_summary' %}
-                {% include '_printful/settings/reports/sales_and_costs_summary.twig' %}
+                {% include 'craft-printful-api/settings/reports/sales_and_costs_summary.twig' %}
             {% case 'printful_costs' %}
-                {% include '_printful/settings/reports/printful_costs.twig' %}
+                {% include 'craft-printful-api/settings/reports/printful_costs.twig' %}
             {% case 'profit' %}
-                {% include '_printful/settings/reports/profit.twig' %}
+                {% include 'craft-printful-api/settings/reports/profit.twig' %}
             {% case 'total_paid_orders' %}
-                {% include '_printful/settings/reports/total_paid_orders.twig' %}
+                {% include 'craft-printful-api/settings/reports/total_paid_orders.twig' %}
             {% case 'costs_by_amount' %}
-                {% include '_printful/settings/reports/costs_by_amount.twig' %}
+                {% include 'craft-printful-api/settings/reports/costs_by_amount.twig' %}
             {% case 'costs_by_product' %}
-                {% include '_printful/settings/reports/costs_by_product.twig' %}
+                {% include 'craft-printful-api/settings/reports/costs_by_product.twig' %}
             {% case 'costs_by_variant' %}
-                {% include '_printful/settings/reports/costs_by_variant.twig' %}
+                {% include 'craft-printful-api/settings/reports/costs_by_variant.twig' %}
             {% case 'average_fulfillment_time' %}
-                {% include '_printful/settings/reports/average_fulfillment_time.twig' %}
+                {% include 'craft-printful-api/settings/reports/average_fulfillment_time.twig' %}
         {% endswitch %}
     {% else %}
         <h2>Generate Reports from Printful</h2>

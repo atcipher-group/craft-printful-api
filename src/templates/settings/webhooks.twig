@@ -3,14 +3,14 @@
 {% set title = "Printful - Webhooks" %}
 
 {% block sidebar %}
-    {% include "_printful/sidenav.twig" %}
+    {% include "printful-api/sidenav.twig" %}
 {% endblock %}
 
 {% block actionButton %}
      <form method="post">
         {{ csrfInput() }}
-        {{ actionInput('_printful/webhooks/remove') }}
-        {{ redirectInput('_printful/settings/webhooks') }}
+        {{ actionInput('printful-api/webhooks/remove') }}
+        {{ redirectInput('printful-api/settings/webhooks') }}
         {{ form.button({
             'label': 'Remove Webhooks',
             'attributes': {
@@ -29,8 +29,8 @@
     </p>
     <form method="post">
         {{ csrfInput() }}
-        {{ actionInput('_printful/webhooks/create') }}
-        {{ redirectInput('_printful/settings/webhooks') }}
+        {{ actionInput('craft-printful-api/webhooks/create') }}
+        {{ redirectInput('craft-printful-api/settings/webhooks') }}
         {{ form.checkboxGroupField({
             options: [
                 {

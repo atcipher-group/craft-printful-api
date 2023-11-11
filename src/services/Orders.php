@@ -2,7 +2,7 @@
 
 namespace atciphergroup\craftprintfulapi\services;
 
-use atciphergroup\craftprintfulapi\PrintfulPlugin;
+use atciphergroup\craftprintfulapi\Plugin as PrintfulPlugin;
 use craft\commerce\elements\Order;
 use craft\commerce\models\OrderStatus;
 use craft\commerce\Plugin;
@@ -161,6 +161,7 @@ class Orders
             $fieldGroup->name = "Orders";
             \Craft::$app->fields->saveGroup($fieldGroup);
             $fieldGroupCheck = null;
+            $allFieldGroups = \Craft::$app->getFields()->getAllGroups();
             foreach ($allFieldGroups as $row) {
                 if ($row->name === 'Orders') {
                     $fieldGroupCheck = $row->id;
@@ -223,6 +224,7 @@ class Orders
             $fieldGroup->name = "Orders";
             \Craft::$app->fields->saveGroup($fieldGroup);
             $fieldGroupCheck = null;
+            $allFieldGroups = \Craft::$app->getFields()->getAllGroups();
             foreach ($allFieldGroups as $row) {
                 if ($row->name === 'Orders') {
                     $fieldGroupCheck = $row->id;
@@ -285,6 +287,7 @@ class Orders
             $fieldGroup->name = "Orders";
             \Craft::$app->fields->saveGroup($fieldGroup);
             $fieldGroupCheck = null;
+            $allFieldGroups = \Craft::$app->getFields()->getAllGroups();
             foreach ($allFieldGroups as $row) {
                 if ($row->name === 'Orders') {
                     $fieldGroupCheck = $row->id;
@@ -339,13 +342,19 @@ class Orders
         $fieldLayout->setTabs([]);
 
         $field = \Craft::$app->fields->getFieldByHandle('printfulCoolingOff');
-        \Craft::$app->fields->deleteField($field);
+        if (!is_null($field)) {
+            \Craft::$app->fields->deleteField($field);
+        }
 
         $field = \Craft::$app->fields->getFieldByHandle('orderProfitLoss');
-        \Craft::$app->fields->deleteField($field);
+        if (!is_null($field)) {
+            \Craft::$app->fields->deleteField($field);
+        }
 
         $field = \Craft::$app->fields->getFieldByHandle('printfulOrderNumber');
-        \Craft::$app->fields->deleteField($field);
+        if (!is_null($field)) {
+            \Craft::$app->fields->deleteField($field);
+        }
 
         $allFieldGroups = \Craft::$app->getFields()->getAllGroups();
         foreach ($allFieldGroups as $row) {
@@ -411,6 +420,7 @@ class Orders
             $fieldGroup->name = "Shipping";
             \Craft::$app->fields->saveGroup($fieldGroup);
             $fieldGroupCheck = null;
+            $allFieldGroups = \Craft::$app->getFields()->getAllGroups();
             foreach ($allFieldGroups as $row) {
                 if ($row->name === 'Shipping') {
                     $fieldGroupCheck = $row->id;
@@ -462,7 +472,9 @@ class Orders
         $camelcase = StringHelper::camelCase($fieldName);
 
         $field = \Craft::$app->fields->getFieldByHandle($camelcase);
-        \Craft::$app->fields->deleteField($field);
+        if (!is_null($field)) {
+            \Craft::$app->fields->deleteField($field);
+        }
     }
 
     public function removeGeneratedShippingFieldGroup(): void

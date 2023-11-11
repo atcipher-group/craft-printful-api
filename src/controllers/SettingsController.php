@@ -2,8 +2,7 @@
 
 namespace atciphergroup\craftprintfulapi\controllers;
 
-use atciphergroup\craftprintfulapi\models\Settings;
-use atciphergroup\craftprintfulapi\PrintfulPlugin;
+use atciphergroup\craftprintfulapi\Plugin as PrintfulPlugin;
 use craft\web\Controller;
 
 class SettingsController extends Controller
@@ -12,7 +11,7 @@ class SettingsController extends Controller
     {
         $settings = PrintfulPlugin::getInstance()->getSettings();
 
-        return $this->renderTemplate('_printful/settings/index.twig', [
+        return $this->renderTemplate('craft-printful-api/settings/index.twig', [
             'settings' => $settings
         ]);
     }

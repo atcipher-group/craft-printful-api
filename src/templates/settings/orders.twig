@@ -3,7 +3,7 @@
 {% set title = "Printful - Recent Orders" %}
 
 {% block sidebar %}
-    {% include "_printful/sidenav.twig" %}
+    {% include "craft-printful-api/sidenav.twig" %}
 {% endblock %}
 
 {% block actionButton %}
@@ -18,5 +18,10 @@
 {% endblock %}
 
 {% block content %}
-    <p></p>
+    <h2>Orders from Printful</h2>
+    <p>
+        We are currently working on a way of importing all the Orders from your Printful account into this page. This
+        will allow you to see what orders are currently on your Printful account and the current status of that order.
+        In the meantime, please use the Craft Commerce order page for your customers orders.
+    </p>
 {% endblock %}

@@ -3,7 +3,7 @@
 {% set title = "Printful - Categories" %}
 
 {% block sidebar %}
-    {% include "_printful/sidenav.twig" %}
+    {% include "craft-printful-api/sidenav.twig" %}
 {% endblock %}
 
 {% block content %}
@@ -15,8 +15,8 @@
     </p>
     <form method="post">
         {{ csrfInput() }}
-        {{ actionInput('_printful/category/import') }}
-        {{ redirectInput('_printful/settings/categories') }}
+        {{ actionInput('craft-printful-api/category/import') }}
+        {{ redirectInput('craft-printful-api/settings/categories') }}
         {{ form.button({
             'label': 'Import Categories',
             'attributes': {

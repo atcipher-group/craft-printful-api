@@ -2,7 +2,7 @@
 
 namespace atciphergroup\craftprintfulapi\controllers;
 
-use atciphergroup\craftprintfulapi\PrintfulPlugin;
+use atciphergroup\craftprintfulapi\Plugin as PrintfulPlugin;
 use atciphergroup\craftprintfulapi\services\Products;
 use craft\web\Controller;
 use craft\web\Response;
@@ -21,7 +21,7 @@ class ProductsController extends Controller
     {
         $settings = PrintfulPlugin::getInstance()->getSettings();
 
-        return $this->renderTemplate('_printful/settings/products.twig', [
+        return $this->renderTemplate('craft-printful-api/settings/products.twig', [
             'settings' => $settings
         ]);
     }

@@ -5,10 +5,10 @@
     "license": "proprietary",
     "support": {
         "email": "craftplugins@atcipher.net",
-        "issues": "https://github.com/https://gitlab.com/atcipher/craft-printful-api/issues?state=open",
-        "source": "https://github.com/https://gitlab.com/atcipher/craft-printful-api",
-        "docs": "https://github.com/https://gitlab.com/atcipher/craft-printful-api",
-        "rss": "https://github.com/https://gitlab.com/atcipher/craft-printful-api/releases.atom"
+        "issues": "https://github.com/atcipher-group/craft-printful-api/issues?state=open",
+        "source": "https://github.com/atcipher-group/craft-printful-api",
+        "docs": "https://github.com/atcipher-group/craft-printful-api",
+        "rss": "https://github.com/atcipher-group/craft-printful-api/releases.atom"
     },
     "require": {
         "php": ">=8.0.2",
@@ -26,10 +26,10 @@
         }
     },
     "extra": {
-        "handle": "printful-api",
+        "handle": "craft-printful-api",
         "name": "Printful API",
         "developer": "Atcipher Group",
-        "documentationUrl": "https://gitlab.com/atcipher/craft-printful-api"
+        "documentationUrl": "https://github.com/atcipher-group/craft-printful-api"
     },
     "scripts": {
         "check-cs": "ecs check --ansi",
