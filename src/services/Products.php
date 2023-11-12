@@ -150,6 +150,8 @@ class Products
                 'name' => 'Printful Description',
                 'handle' => 'printfulDescription',
                 'type' => 'craft\fields\PlainText',
+                'multiline' => true,
+                'initialRows' => 6,
                 'groupId' => $fieldGroupCheck,
                 'searchable' => false,
             ]);

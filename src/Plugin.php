@@ -2,6 +2,7 @@
 
 namespace atciphergroup\craftprintfulapi;
 
+use atciphergroup\craftprintfulapi\services\Filesystems;
 use atciphergroup\craftprintfulapi\services\Orders;
 use Craft;
 use atciphergroup\craftprintfulapi\models\Settings;
@@ -60,6 +61,11 @@ class Plugin extends BasePlugin
                 $service->buildShippingFields('Printful Shipping Date', 'date');
                 $service->buildShippingFields('Printful Shipping Return Reason');
                 $service->createOrderStatuses();
+
+                $fs = new Filesystems();
+                $fs->createFilesystems();
+                $fs->createAssetVolumes();
+
                 Craft::$app->getProjectConfig()->rebuild();
             }
         );
