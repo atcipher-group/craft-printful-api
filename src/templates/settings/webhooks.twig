@@ -3,13 +3,13 @@
 {% set title = "Printful - Webhooks" %}
 
 {% block sidebar %}
-    {% include "printful-api/sidenav.twig" %}
+    {% include "craft-printful-api/sidenav.twig" %}
 {% endblock %}
 
 {% block actionButton %}
      <form method="post">
         {{ csrfInput() }}
-        {{ actionInput('printful-api/webhooks/remove') }}
+        {{ actionInput('craft-printful-api/webhooks/remove') }}
         {{ redirectInput('printful-api/settings/webhooks') }}
         {{ form.button({
             'label': 'Remove Webhooks',
@@ -38,84 +38,96 @@
                     name: 'webhookOptions[]',
                     id: 'packageShipped',
                     value: 'package_shipped',
-                    checked: 'package_shipped' in choices.types
+                    checked: 'package_shipped' in choices.types,
+                    disabled: false
                 },
                 {
                     label: 'Package Returned',
                     name: 'webhookOptions[]',
                     id: 'packageReturned',
                     value: 'package_returned',
-                    checked: 'package_returned' in choices.types
+                    checked: 'package_returned' in choices.types,
+                    disabled: false
                 },
                 {
                     label: 'Order Created',
                     name: 'webhookOptions[]',
                     id: 'orderCreated',
                     value: 'order_created',
-                    checked: 'order_created' in choices.types
+                    checked: 'order_created' in choices.types,
+                    disabled: false
                 },
                 {
                     label: 'Order Updated',
                     name: 'webhookOptions[]',
                     id: 'orderUpdated',
                     value: 'order_updated',
-                    checked: 'order_updated' in choices.types
+                    checked: 'order_updated' in choices.types,
+                    disabled: false
                 },
                 {
                     label: 'Order Failed',
                     name: 'webhookOptions[]',
                     id: 'orderFailed',
                     value: 'order_failed',
-                    checked: 'order_failed' in choices.types
+                    checked: 'order_failed' in choices.types,
+                    disabled: false
                 },
                 {
                     label: 'Order Cancelled',
                     name: 'webhookOptions[]',
                     id: 'orderCanceled',
                     value: 'order_canceled',
-                    checked: 'order_canceled' in choices.types
+                    checked: 'order_canceled' in choices.types,
+                    disabled: false
                 },
                 {
                     label: 'Order Put on Hold',
                     name: 'webhookOptions[]',
                     id: 'orderPutHold',
                     value: 'order_put_hold',
-                    checked: 'order_put_hold' in choices.types
+                    checked: 'order_put_hold' in choices.types,
+                    disabled: false
                 },
                 {
                     label: 'Order Put on Hold Approval',
                     name: 'webhookOptions[]',
                     id: 'orderPutHoldApproval',
                     value: 'order_put_hold_approval',
-                    checked: '' in choices.types
+                    checked: 'order_put_hold_approval' in choices.types,
+                    disabled: false
                 },
                 {
                     label: 'Order Remove Hold',
                     name: 'webhookOptions[]',
                     id: 'orderRemoveHold',
                     value: 'order_remove_hold',
-                    checked: 'order_remove_hold' in choices.types
+                    checked: 'order_remove_hold' in choices.types,
+                    disabled: false
                 },
                 {
                     label: 'Product Updated',
                     name: 'webhookOptions[]',
                     id: 'productUpdated',
                     value: 'product_updated',
-                    checked: 'product_updated' in choices.types
+                    checked: 'product_updated' in choices.types,
+                    disabled: false
                 },
                 {
                     label: 'Product Deleted',
                     name: 'webhookOptions[]',
                     id: 'productDeleted',
                     value: 'product_deleted',
-                    checked: 'product_deleted' in choices.types
+                    checked: 'product_deleted' in choices.types,
+                    disabled: false
                 },
                 {
-                    label: 'Stock Updated',
+                    label: 'Stock Updated - Coming in the next update',
                     name: 'webhookOptions[]',
                     id: 'stockUpdated',
                     value: 'stock_updated',
-                    checked: 'stock_updated' in choices.types
+                    checked: 'stock_updated' in choices.types,
+                    disabled: true
                 }
             ],
         }) }}
