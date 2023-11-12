@@ -1,10 +1,35 @@
-# Printful API
+# Printful API for Craft CMS & Craft Commerce
 
-Allows users to get products from their Printful account into their Craft Commerce website.
+This plugin allows you to add your products from your Printful account into your Craft Commerce website.
+
+Key Features:
+
+* API Integration with Printful.
+* Import products, their variants and their images.
+* Import and add the categories from Printful.
+* Automatically create Order Statuses in Craft Commerce that meets Printful's requirements.
+* Automatic shipping costs added to your cart (Craft Commerce Pro required).
+* Easy access to reporting direct from Printful.
+* Setup Webhooks to complete the following:
+  * Package Shipped: When a package is ready to go, Printful will update your website and change your customers order status to dispatched.
+  * Package Returned: If you had to return a product, then this hook will update your customers account to state that this has been returned.
+  * Order Created: Once the order has been created, the webhook from Printful will update the customers account to reflect this.
+  * Order Updated: Any changes to your customers order will be sent back to your Craft site. This will update your customers order status to reflect the changes.
+  * Order Failed: If the order has failed, then this will reflect as "Failed" on your customers order. It might be worth contacting your customer if this happens.
+  * Order Cancelled: If the order has been cancelled, this too will update your customers order status to "Cancelled".
+  * There are more webhooks coming soon and these will be released in the next minor update.
+* Automatic shipping updates based on Webhooks.
+* ... and lots more!
+
+Turn your Craft Commerce website into an automated ecommerce system. Let this plugin do all the hard work for you by managing your orders, products and more. You don't need to do anything excpet import new products, update your website, and provide the best Customer Service that you can.
 
 ## Requirements
 
-This plugin requires Craft CMS 4.5.0 or later, and PHP 8.0.2 or later.
+This plugin requires the following: - 
+* Craft CMS 4.5.0 or later,
+* Craft Commerce 4.3.0 or later,
+* Printful API SDK 2.0 or later,
+* PHP 8.0.2 or later.
 
 ## Installation
 

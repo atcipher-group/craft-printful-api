@@ -79,12 +79,9 @@ class Orders
             'items' => $items
         ];
 
-        $params = [];
-//        if (!$order->printfulCoolingOff) {
-//            $params[] = [
-//                'confirm' => true
-//            ];
-//        }
+        $params[] = [
+            'confirm' => true
+        ];
 
         $orderDetails = $pr->post('orders', $data, $params);
 
