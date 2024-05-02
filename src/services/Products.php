@@ -499,7 +499,7 @@ class Products
 
         try {
             if (!\Craft::$app->elements->saveElement($product)) {
-                $errors = $product->getErrors();
+                $errors = $product->getFirstError();
             }
         } catch (ElementNotFoundException|Exception $e) {
             $errors =  $e->getMessage();
