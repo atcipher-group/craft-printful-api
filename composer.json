@@ -3,6 +3,7 @@
     "description": "Allows users to get products from their Printful account into their Craft Commerce website.",
     "type": "craft-plugin",
     "license": "proprietary",
+    "version": "v1.0.1",
     "support": {
         "email": "craftplugins@atcipher.net",
         "issues": "https://github.com/atcipher-group/craft-printful-api/issues?state=open",
